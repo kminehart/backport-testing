@@ -5,10 +5,8 @@ on:
       - completed
 jobs:
   backport:
-    # Only run this job if the triggering workflow was not skipped (and on grafana repo)
-    if: github.event.head.repo.fork == false
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event.head.repo.fork }}"
+      - run: echo "${{ github.event.workflow_run.head.repo.fork }}"
       - run: echo "${{ github.repository }}"
       - run: echo "Do something important"

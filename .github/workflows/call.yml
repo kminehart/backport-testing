@@ -1,0 +1,12 @@
+on:
+  workflow_run:
+    workflows: ["Test"]
+    types:
+      - completed
+jobs:
+  backport:
+    # Only run this job if the triggering workflow was not skipped (and on grafana repo)
+    if: github.repository == 'kminehart/backport-testing' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Do something important"
